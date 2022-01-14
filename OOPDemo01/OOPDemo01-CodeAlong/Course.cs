@@ -56,6 +56,66 @@ namespace OOPDemo01_CodeAlong
         {
             Students.Remove(name);
         }
+
+        public bool SaveToFile(string filepath)
+        {
+            bool success = false;
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filepath))
+                {
+                    // Write the courseNo and courseName to the file
+                    writer.WriteLine(CourseNo);
+                    writer.WriteLine(CourseName);
+                    // Write the name of all the students in the course
+                    foreach (string student in Students)
+                    {
+                        writer.WriteLine(student);
+                    }
+                    success = true;
+                }
+            }
+            catch
+            {
+                success = false;
+            }
+
+            return success;
+        }
         #endregion
+
+        public bool LoadFromFile(string filepath)
+        {
+            bool success = false;
+
+            try
+            {
+                using (StreamReader reader = new StreamReader(filepath))
+                {
+                    // Read the CourseNo and CourseName from the file
+                    var courseNo = reader.ReadLine();
+                    var courseName = reader.ReadLine();
+
+                    // Read the student names from the file
+                    while(reader.EndOfStream == false)
+                    {
+                        // ? means that the data type is Nullable meaning they might not have a value 
+                        string? lineData = reader.ReadLine();
+                        if (!string.IsNullOrEmpty(lineData))
+                        {
+                            Students.Add(lineData);
+                        } 
+                    }
+                }
+            }
+
+            catch
+            {
+                success = false;
+            }
+            
+            return success;
+        }
     }
 }
