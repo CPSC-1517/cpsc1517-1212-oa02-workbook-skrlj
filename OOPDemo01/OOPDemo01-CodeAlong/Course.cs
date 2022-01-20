@@ -10,7 +10,25 @@ namespace OOPDemo01_CodeAlong
     {
         #region Define readonly data fields
         public readonly string CourseNo;
-        public readonly string CourseName;
+
+        // Define a backing field for CourseName
+        private string _CourseName;
+
+        // Define a private set property for CourseName
+        public string CourseName
+        {
+            get { return _CourseName; }
+            private set // Can only be changed by methods within this class. External code will not be allowed to change it.
+            {
+                // Validate that the courseName is not null or an empty string
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new InvalidOperationException("Course CourseName value is required.");
+                }
+                _CourseName = value.Trim();
+            }
+        }
+
         public readonly List<string> Students = new List<string>();
         #endregion
 
@@ -34,14 +52,8 @@ namespace OOPDemo01_CodeAlong
             {
                 throw new ArgumentException("CourseNo must contain exactly 8 characters");
             }
-
             CourseNo = courseNo;
 
-            // Validate that the courseName is not null or an empty string
-            if ( string.IsNullOrEmpty ( courseName ) )
-            {
-                throw new InvalidOperationException("CourseName is required.");
-            }
             CourseName = courseName;
         }
         #endregion
