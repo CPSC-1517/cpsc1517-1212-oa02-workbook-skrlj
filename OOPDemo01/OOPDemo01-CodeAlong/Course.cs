@@ -129,5 +129,10 @@ namespace OOPDemo01_CodeAlong
             
             return success;
         }
+
+        public override string ToString()
+        {
+            return $"{CourseNo},{CourseName}";
+        }
     }
 }
