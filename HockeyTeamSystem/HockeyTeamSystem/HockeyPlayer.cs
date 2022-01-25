@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace HockeyTeamSystem
 {
     // change "internal" to public if you are interested in using the class outside of the current namespace
-    public class HockeyPlayer
+    public class HockeyPlayer : Person
     {
-        private string _fullName;
         private int _primaryNumber;
         public PlayerPosition Position { get; private set; }
         public int PrimaryNumber
@@ -27,34 +26,10 @@ namespace HockeyTeamSystem
             }
         }
 
-        // Define a fully-implemented property for FullName with readonly information
-        public string FullName
-        {
-            get { return _fullName; }
-
-            private set
-            {
-                // Validate FullName is not null, not empty, and not a whitespace
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("HockeyPlayer FullName must not be null, empty, or be a whitespace.");
-                }
-
-                // Validate FullName contains at minimum 3 characters
-                if (value.Length < 3)
-                {
-                    throw new ArgumentException("HockeyPlayer FullName must contain at least 3 characters.");
-                }
-
-                _fullName = value.Trim();
-            }
-        }
-
         // Define a greedy constructor
         #pragma warning disable CS8618   
-        public HockeyPlayer(string fullName, int primaryNumber, PlayerPosition playerPosition)
+        public HockeyPlayer(string fullName, int primaryNumber, PlayerPosition playerPosition) : base(fullName)
         {
-            FullName = fullName;
             PrimaryNumber = primaryNumber;
             Position = playerPosition;
         }
@@ -62,7 +37,7 @@ namespace HockeyTeamSystem
         // Override the ToString() method to return a CSV
         public override string ToString()
         {
-            return $"{FullName}, {PrimaryNumber}, {Position}";
+            return $"{FullName},{PrimaryNumber},{Position}";
         }
     }
 }

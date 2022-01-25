@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using HockeyTeamSystem;
 
+Person person1 = new Person("S Wu");
+
 // Test with valid full name, primary number
 HockeyPlayer player1 = new("    Connor McDavid      ", 97, PlayerPosition.Center);
 Console.WriteLine(player1); // The HockeyPlayer.ToString() will be invoked indirectly
