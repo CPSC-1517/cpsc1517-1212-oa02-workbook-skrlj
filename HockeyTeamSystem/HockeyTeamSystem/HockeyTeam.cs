@@ -8,6 +8,22 @@ namespace HockeyTeamSystem
 {
     public class HockeyTeam
     {
+        // Define a computed (read-only) property for TotalPoints
+        public int TotalPoints
+        {
+            get
+            {
+                int sum = 0;
+
+                foreach (HockeyPlayer currentPlayer in HockeyPlayers)
+                {
+                    sum += currentPlayer.Points;
+                }
+
+                return sum;
+            }
+        }
+
         // Define a fully-implemented property with a backing field for the Team Name
         private string _teamName; // Define a private backing field for the property
 
@@ -17,7 +33,7 @@ namespace HockeyTeamSystem
 
             private set 
             { 
-                if (string.IsNullOrWhiteSpace(_teamName))
+                if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentNullException("HockeyTeam TeamName cannot be empty, null, or a whitespace");
                 }
@@ -45,7 +61,8 @@ namespace HockeyTeamSystem
 
         // Define a readonly property with a private set for the coach
         // The Coach property is known as Aggregation/Composition (when the field/property) is not
-        // a value type
+        // a value type. Composition is a specified version of aggregation meaning that it cannot
+        // exist on its own.
         public HockeyCoach Coach { get; private set; }
 
         // Define a greedy constructor that has a parameter for the TeamName, TeamDivision, and Coach
@@ -73,8 +90,13 @@ namespace HockeyTeamSystem
             }
 
             // Validate that the player (by primary number) is not already on the team
-            
-
+            foreach(var currentPlayer in HockeyPlayers)
+            {
+                if (currentPlayer.PrimaryNumber == player.PrimaryNumber)
+                {
+                    throw new Exception("HockeyTeam HockeyPlayers cannot have the same PrimaryNumber");
+                }
+            }
 
             HockeyPlayers.Add(player);
         }
