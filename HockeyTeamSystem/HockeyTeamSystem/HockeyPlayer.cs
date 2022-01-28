@@ -66,7 +66,7 @@ namespace HockeyTeamSystem
             // There should be 5 elements in the tokens
             if(tokens.Length != 5)
             {
-                throw new FormatException($"CSV string not in the expected format. {csvLineText}");
+                throw new FormatException($"CSV string must contain exactly 5 values. {csvLineText}");
             }
 
             return new HockeyPlayer (
@@ -78,7 +78,7 @@ namespace HockeyTeamSystem
                 );
         }
 
-        public static bool TryParse(string csvLineText, HockeyPlayer player)
+        public static bool TryParse(string csvLineText, out HockeyPlayer player)
         {
             bool success = false;
 

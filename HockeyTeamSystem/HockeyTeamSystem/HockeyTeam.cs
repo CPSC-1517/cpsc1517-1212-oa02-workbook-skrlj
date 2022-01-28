@@ -101,7 +101,10 @@ namespace HockeyTeamSystem
             HockeyPlayers.Add(player);
         }
 
-        public void RemovePlayer() { }
+        public override string ToString()
+        {
+            return $"{TeamName},{Coach},{Division}";
+        }
 
     }
 }
