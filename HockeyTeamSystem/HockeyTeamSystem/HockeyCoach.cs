@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace HockeyTeamSystem
@@ -10,6 +11,7 @@ namespace HockeyTeamSystem
     public class HockeyCoach : Person
     {
         // Define a readonly public field that can only be assigned a value in the constructor
+        // [JsonInclude] -> still wont work because the field is read only. Desterilization cannot assign a value to this property
         public readonly string StartDate;
 
         // Define a greedy constructor that takes fullName and startDate as parameters

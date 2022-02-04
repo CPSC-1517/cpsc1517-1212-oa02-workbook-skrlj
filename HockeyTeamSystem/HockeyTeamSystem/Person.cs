@@ -16,6 +16,7 @@ namespace HockeyTeamSystem
             // Validate that the fullName parameter is not null, whitespaces, or an empty string
             if (string.IsNullOrWhiteSpace(fullName))
             {
+                //throw new ArgumentNullException("Person FullName cannot be empty, null, or a whitespace");
                 throw new ArgumentNullException("Person FullName cannot be empty, null, or a whitespace");
             }
 
@@ -24,12 +25,12 @@ namespace HockeyTeamSystem
             // ^ = start of the input
             // $ = end of input
             // [] = range of characters
-            // {3,} = at least 3
+            // {5,} = at least 5
             // {,2} = up to 2
-            var fullNameCheck = new Regex(@"^[a-zA-Z \-]{3,}$");
+            var fullNameCheck = new Regex(@"^[a-zA-Z \-]{5,}$");
             if (fullNameCheck.IsMatch(fullName) == false)
             {
-                throw new ArgumentException("Person FullName must contain at least 3 characters.");
+                throw new ArgumentException("Person FullName must contain at least 5 characters.");
             }
 
             // the keyword "this" refers to the current object and is used to access a field or property
