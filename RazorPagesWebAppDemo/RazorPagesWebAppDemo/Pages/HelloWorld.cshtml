@@ -1,0 +1,13 @@
+﻿@page
+@model RazorPagesWebAppDemo.Pages.HelloWorldModel
+@{
+}
+<h1>Hello World from a Razor Page</h1>
+
+<p>Current date is @DateTime.Now</p>
+
+@for(int count = 1; count <= 20; count++)
+{
+	string fontSize = 12 + count + "px";
+	<p style="font-size: @fontSize">HelloWorld</p>
+}

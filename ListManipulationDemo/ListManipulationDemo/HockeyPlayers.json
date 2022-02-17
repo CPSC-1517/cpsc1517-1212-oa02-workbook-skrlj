@@ -1,0 +1,40 @@
+{
+  "TeamName": "Edmonton Oilers",
+  "Players": [
+    {
+      "PlayerName": "Leon Draisaitl",
+      "GamesPlayed": 46,
+      "Goals": 33,
+      "Assists": 32,
+      "Points": 65
+    },
+    {
+      "PlayerName": "Connor McDavid",
+      "GamesPlayed": 45,
+      "Goals": 24,
+      "Assists": 40,
+      "Points": 64
+    },
+    {
+      "PlayerName": "Ryan Nugent-Hopkins",
+      "GamesPlayed": 39,
+      "Goals": 6,
+      "Assists": 28,
+      "Points": 34
+    },
+    {
+      "PlayerName": "Zach Hyman",
+      "GamesPlayed": 40,
+      "Goals": 14,
+      "Assists": 13,
+      "Points": 27
+    },
+    {
+      "PlayerName": "Jesse Puljujarvi",
+      "GamesPlayed": 44,
+      "Goals": 11,
+      "Assists": 15,
+      "Points": 26
+    }
+  ]
+}
