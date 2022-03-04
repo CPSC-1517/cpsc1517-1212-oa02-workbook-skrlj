@@ -74,3 +74,27 @@ catch (Exception ex)
     Console.WriteLine("Haseeb is incorrect");
 }
 
+Console.WriteLine();
+// Read from the JSON file we just created
+try
+{
+    JsonSerializerOptions options = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
+    string jsonString = File.ReadAllText(HockeyTeamJsonFile);
+
+    HockeyTeam deserializedTeam = JsonSerializer.Deserialize<HockeyTeam>(jsonString, options);
+    Console.WriteLine(deserializedTeam.TeamName);
+    foreach(HockeyPlayer currentPlayer in deserializedTeam.Players)
+    {
+        Console.WriteLine(currentPlayer.ToString());
+    }
+}
+
+catch(Exception ex)
+{
+    Console.WriteLine($"JSON read not successful with exception: {ex.Message}");
+}
+

@@ -1,0 +1,30 @@
+﻿@page
+@model RazorPagesWebAppDemo.Pages.FormFieldControlsModel
+@{
+	ViewData["Title"] = "HTML Form Field Controls";
+}
+
+<h1>HTML Form Field Controls</h1>
+
+@Model.Message
+
+<form method="post">
+	<div>
+		<label for="Username">Username</label>
+		<input type="text" id="Username" name="Username" value="@Model.Username"/>
+	</div>
+
+	<div>
+		<label for="Password">Password</label>
+		<input type="password" id="Password" name="Password" value="@Model.Password"/>
+	</div>
+
+	<div>
+		<label for="Password">Confirm Password</label>
+		<input type="password" id="ConfirmPassword" name="ConfirmPassword" value="@Model.ConfirmPassword"/>
+	</div>
+
+	<div>
+		<button type="submit">Submit</button>
+	</div>
+</form>
