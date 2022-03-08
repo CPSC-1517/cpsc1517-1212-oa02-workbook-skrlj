@@ -1,14 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore; // for DbContext, DbContextOptions
+using WestWindSystem.Entities; // for Category
 
 namespace WestWindSystem.DAL
 {
-    public partial class WestWindContext : DbContext
+    internal class WestWindContext : DbContext
     {
+        public WestWindContext()
+        {
+
+        }
+
+        public WestWindContext(DbContextOptions<WestWindContext> options) :base(options)
+        {
+
+        }
+
+        public DbSet<Category> Categories { get; set; } = null!;
 
     }
 }
