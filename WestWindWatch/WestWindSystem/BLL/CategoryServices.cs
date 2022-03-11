@@ -15,9 +15,9 @@ namespace WestWindSystem.BLL
         }
         #endregion
 
-        public IQueryable<Category> GetAll()
+        public List<Category> GetAllCategory()
         {
-            return _context.Categories;
+            return _context.Categories.ToList();
         }
     }
 }

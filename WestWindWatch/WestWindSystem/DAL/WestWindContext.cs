@@ -10,12 +10,15 @@ namespace WestWindSystem.DAL
 
         }
 
-        public WestWindContext(DbContextOptions<WestWindContext> options) :base(options)
+       public WestWindContext(DbContextOptions<WestWindContext> options) : base(options)
         {
 
         }
 
         public DbSet<Category> Categories { get; set; } = null!;
 
+        public DbSet<BuildVersion> BuildVersions { get; set; } = null!;
+
+        public DbSet<BuildVersion> Region { get; set; } = null!;
     }
 }

@@ -9,7 +9,8 @@ using System.ComponentModel.DataAnnotations; // for Key
 
 namespace WestWindSystem.Entities
 {
-    [Table("BuildVersion")]
+    // unessessary as the class and table name are identical
+    //[Table("BuildVersion")]
     public class BuildVersion
     {
         [Key]

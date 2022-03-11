@@ -1,0 +1,16 @@
+﻿@page
+@model WestWindWebApp.Pages.ListCategoriesModel
+@{
+}
+
+<h2>WestWind Categories</h2>
+ @if (Model.WestWindCategories.Count != null) {
+
+	 foreach(var item in Model.WestWindCategories)
+	 {
+		 <p>@item.CategoryID, @item.CategoryName, @item.Description</p>
+	 }
+ }
+ else {
+	 <p>No categories</p>
+ }

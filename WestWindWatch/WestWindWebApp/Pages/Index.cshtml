@@ -4,7 +4,14 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model.BuildVersionInfo == null) {
+     <p style="font-weight=bold; color=red;">Build Version unknown</p>
+}
+else {
+    <p>Database Version:
+           @Model.BuildVersionInfo.Major .
+           @Model.BuildVersionInfo.Minor .
+           @Model.BuildVersionInfo.Build .
+           was released on @Model.BuildVersionInfo.ReleaseDate.ToShortDateString()
+    </p>
+}

@@ -17,6 +17,7 @@ namespace WestWindSystem.Entities
         [StringLength(15, ErrorMessage = "CategoryName must contain 15 or less characters")]
         public string CategoryName { get; set; } = null!;
 
+        // Default mapping for string is to a varchar, we are telling the computer that this property maps to a ntext instead
         [Column(TypeName = "ntext")]
         public string? Description { get; set; }
     }
