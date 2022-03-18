@@ -18,7 +18,7 @@ namespace WestWindSystem.Entities
         public string CategoryName { get; set; } = null!;
 
         // Default mapping for string is to a varchar, we are telling the computer that this property maps to a ntext instead
-        [Column(TypeName = "ntext")]
+        //[Column(TypeName = "ntext")]
         public string? Description { get; set; }
     }
 }

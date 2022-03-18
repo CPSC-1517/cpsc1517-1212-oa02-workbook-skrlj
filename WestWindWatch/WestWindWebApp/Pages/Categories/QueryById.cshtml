@@ -1,0 +1,22 @@
+﻿@page
+@model WestWindWebApp.Pages.Categories.QueryByIdModel
+@{
+}
+<h1>Category Query by Primary Key (Category Id)</h1>
+
+@*<p>@Model.FeedbackMessage</p>*@
+
+@*This is used to enable html tags mixed with the Csharp code "<br />"*@
+<p>@Html.Raw(Model.FeedbackMessage)</p>
+
+<form method="post">
+	<label>Enter Category Id:</label>
+
+	<input type="number"
+		step="1"
+		asp-for="SearchId" 
+		placeholder="enter category id here"
+		required/>
+
+	<button type="submit" asp-page-handler="Fetch">Fetch By Id</button>
+</form>

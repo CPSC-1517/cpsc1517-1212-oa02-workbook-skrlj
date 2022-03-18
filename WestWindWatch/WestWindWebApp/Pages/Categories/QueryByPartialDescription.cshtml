@@ -1,0 +1,45 @@
+﻿@page
+@model WestWindWebApp.Pages.Categories.QueryByPartialDescriptionModel
+@{
+}
+
+<h1>Category Query by Partial Description</h1>
+
+@*<p>@Model.FeedbackMessage</p>*@
+
+@*This is used to enable html tags mixed with the Csharp code "<br />"*@
+<p>@Html.Raw(Model.FeedbackMessage)</p>
+
+@if(Model.SearchResultList.Count > 0) {
+	<table>
+	<thead>
+		<tr>
+			<th>CategoryID</th>
+			<th>Category Name</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model.SearchResultList)
+		{
+			<tr>
+				<td>@item.CategoryID</td>
+				<td>@item.CategoryName</td>
+				<td>@item.Description</td>
+			</tr>
+		}
+	</tbody>
+</table>
+}
+
+<form method="post">
+	<label>Enter Description:</label>
+
+	<input type="text"
+		asp-for="SearchValue" 
+		placeholder="enter category description here"
+		required/>
+
+	<button type="submit" asp-page-handler="Fetch">Fetch By Description</button>
+	<button type="submit" asp-page-handler="Clear">Clear</button>
+</form>
