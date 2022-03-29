@@ -1,0 +1,33 @@
+﻿@page
+@model WestWindWebApp.Pages.Categories.IndexModel
+@{
+    ViewData["Title"] = "Category List";
+}
+<h1>Category List</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+@if(Model.CategoryList.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>CategoryID</th>
+                <th>CategoryName</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.CategoryList)
+            {
+                <tr>
+                    <td>@item.CategoryID</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Description</td>
+                    <td><a asp-page="../Products/Query" asp-route-SelectedCategoryID="@item.CategoryID">View Products</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>    
+}

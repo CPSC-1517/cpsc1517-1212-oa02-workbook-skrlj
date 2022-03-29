@@ -1,0 +1,27 @@
+﻿@page
+@model WestWindWebApp.Pages.QueryProductModel
+@{
+	ViewData["Title"] = "Product Query";
+}
+
+<h1>Product Query</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+	<label asp-for="SelectedCategoryID">Category</label>
+	<select asp-for="SelectedCategoryID">
+		<option value="0">select...</option>
+		@foreach(var item in Model.CategoryList)
+		{
+			if (item.CategoryID == Model.SelectedCategoryID)
+			{
+				<option value="@item.CategoryID" selected>@item.CategoryName</option>
+			}
+			else
+			{
+				<option value="@item.CategoryID" selected>@item.CategoryName</option>
+			}
+		}
+	</select>
+</form>

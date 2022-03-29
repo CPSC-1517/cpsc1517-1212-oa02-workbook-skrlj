@@ -1,0 +1,65 @@
+﻿@page
+@model WestWindWebApp.Pages.Products.QueryModel
+@{
+    ViewData["Title"] = "Product Query";
+}
+
+<h1>Product Query</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+
+    <label asp-for="ProductNameSearchValue">Product Name</label>
+    <input type="text" asp-for="ProductNameSearchValue" />
+
+    <label asp-for="SelectedCategoryID">Category</label>
+    <select asp-for="SelectedCategoryID">
+        <option value="0">select...</option>
+        @foreach(var item in Model.CategoryList)
+        {
+            if (item.CategoryID == Model.SelectedCategoryID)
+            {
+                <option value="@item.CategoryID" selected>@item.CategoryName</option>
+            }
+            else
+            {
+                <option value="@item.CategoryID">@item.CategoryName</option>
+            }
+        }
+    </select>
+
+    <button type="submit" asp-page-handler="SearchByCategoryID">Search By Category</button>
+
+    <button type="submit" asp-page-handler="SearchByProductName">Search By Product Name</button>
+
+     <button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button>
+
+    @if(Model.ProductQueryResultList.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>ProductID</th>
+                    <th>ProductName</th>
+                    <th>Quantity Per Unit</th>
+                    <th>Unit Price</th>
+                    <th>Units On Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.ProductQueryResultList)
+                {
+                    <tr>
+                        <td>@item.ProductID</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.QuantityPerUnit</td>
+                        <td>@item.UnitPrice</td>
+                        <td>@item.UnitsOnOrder</td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+    }
+
+</form>

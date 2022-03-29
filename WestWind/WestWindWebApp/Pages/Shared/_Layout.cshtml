@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WestWindWebApp</title>
+    @*removed the link to bootstrap
+      added linkt to Holiday.css
+      https://holidaycss.js.org/
+    *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/holiday.css@0.9.8" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WestWindWebApp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a asp-area="" asp-page="/Index">
+                        <img src="~/img/Categories-applications-internet-icon.png" alt="Logo image"
+                            title="Go to Home" />
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Index">Home</a>
+                </li>
+                @* setup for a submenu using holiday css*@
+                <li>
+                    <span>Categories</span>
+                    <ul>
+                        <li><a asp-area="" asp-page="/Categories/Index">List</a></li>
+                        <li><a asp-area="" asp-page="/Categories/Query">Query</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <span>Products</span>
+                    <ul>
+                        <li><a asp-area="" asp-page="/Products/Query">Query</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </li>
+            </ul>   
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+            Logo image taken from <a href="https://iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Categories-applications-internet-icon.html">Icon Archive</a> 
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

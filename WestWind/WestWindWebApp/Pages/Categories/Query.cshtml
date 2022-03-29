@@ -1,0 +1,46 @@
+﻿@page "{SearchValue?}"
+@model WestWindWebApp.Pages.Categories.QueryModel
+@{
+    ViewData["Title"] = "Category Query";
+}
+<h1>Category Query</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+    <label asp-for="SearchValue">
+        Enter name or description to search for
+    </label>
+
+    <input type="text" asp-for="SearchValue" />
+
+    <button type="submit" asp-page-handler="Search">Search</button>
+
+    <button type="submit" asp-page-handler="Clear">Clear</button>
+
+    @if(Model.CategoryQueryResultList.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>CategoryID</th>
+                    <th>CategoryName</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.CategoryQueryResultList)
+                {
+                    <tr>
+                        <td>@item.CategoryID</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Description</td>
+                        <td><a asp-page="../Products/Query" asp-route-SelectedCategoryID="@item.CategoryID">View Products</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>    
+    }
+
+</form>
