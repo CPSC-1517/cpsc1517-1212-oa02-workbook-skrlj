@@ -16,14 +16,10 @@ namespace WestWindSystem.BLL
         // Step 2: Define query methods of the Category entity
         public List<Category> Category_List()
         {
-            //IEnumerable<Category> resultListQuery = _dbContext
-            //    .Categories
-            //    .OrderBy(item => item.CategoryName);
-            //return resultListQuery.ToList();
-            return _dbContext
+            var query = _dbContext
                 .Categories
-                .OrderBy(item => item.CategoryName)
-                .ToList();
+                .OrderBy(item => item.CategoryName);
+            return query.ToList();
         }
 
         public Category Category_GetById(int categoryID)

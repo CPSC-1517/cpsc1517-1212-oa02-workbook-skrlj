@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 #region Add namespaces for WestWindSystem class library for BLL classes and entity class
 using WestWindSystem.BLL;
 using WestWindSystem.Entities;
+using WestWindWebApp.Helpers;
 #endregion
 
 namespace WestWindWebApp.Pages.Products
@@ -34,7 +35,15 @@ namespace WestWindWebApp.Pages.Products
         public List<Product> ProductQueryResultList { get; set; } = new();
         #endregion
 
-        public void OnGet()
+        // Step 3
+        #region Paginator
+        //my desired page size
+        private const int PAGE_SIZE = 5;
+        //be able to hold an instance of the Paginator
+        public Paginator Pager { get; set; }
+        #endregion
+
+        public void OnGet(int? currentPage)
         {
             CategoryList = _categoryServices.Category_List();
 
@@ -45,7 +54,21 @@ namespace WestWindWebApp.Pages.Products
             }
             else if (!string.IsNullOrWhiteSpace(ProductNameSearchValue))
             {
-                ProductQueryResultList = _productServices.Product_GetByPartialProductName(ProductNameSearchValue);
+                //ProductQueryResultList = _productServices.Product_GetByPartialProductName(ProductNameSearchValue);
+
+                // Step 4
+                //determine the current page number
+                int pagenumber = currentPage.HasValue ? currentPage.Value : 1;
+                //setup the current state of the paginator (sizing)
+                PageState current = new(pagenumber, PAGE_SIZE);
+                //temporary local integer to hold the results of the query's total collection size
+                //  this will be need by the Paginator during the paginator's execution
+                int totalcount;
+                ProductQueryResultList = _productServices.Product_GetByPartialProductName(ProductNameSearchValue, PAGE_SIZE, pagenumber, out totalcount);
+                //create the needed Pagnator instance
+                Pager = new Paginator(totalcount, current);
+
+
                 FeedbackMessage = $"Search returned {ProductQueryResultList.Count} result(s).";
             }
 
