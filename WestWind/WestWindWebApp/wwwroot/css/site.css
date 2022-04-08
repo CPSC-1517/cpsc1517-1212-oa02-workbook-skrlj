@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.text-danger {
+    color: darkred;
+    font-size: 20px;
+}

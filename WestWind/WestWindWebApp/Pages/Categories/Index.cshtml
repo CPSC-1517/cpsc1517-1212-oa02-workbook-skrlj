@@ -7,11 +7,16 @@
 
 <p>@Model.FeedbackMessage</p>
 
+<a title="Create Category"
+   asp-page="/Categories/CategoryCRUD">
+   Create Category</a>
+
 @if(Model.CategoryList.Count > 0)
 {
     <table>
         <thead>
             <tr>
+                <th></th>
                 <th>CategoryID</th>
                 <th>CategoryName</th>
                 <th>Description</th>
@@ -22,6 +27,13 @@
             @foreach(var item in Model.CategoryList)
             {
                 <tr>
+                    <td>
+                        <a title="Edit"
+                           asp-page="/Categories/CategoryCRUD"
+                           asp-route-currentCategoryID="@item.CategoryID">
+                           Edit
+                       </a>
+                    </td>
                     <td>@item.CategoryID</td>
                     <td>@item.CategoryName</td>
                     <td>@item.Description</td>

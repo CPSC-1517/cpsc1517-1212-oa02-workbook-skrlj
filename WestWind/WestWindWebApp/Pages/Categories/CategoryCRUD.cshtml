@@ -1,0 +1,46 @@
+﻿@page "{currentCategoryID?}"
+@model WestWindWebApp.Pages.Categories.CategoryCRUDModel
+@{
+	ViewData["Title"] = Model.CurrentCategory.CategoryID == 0 ? "New Category" : "Edit Category";
+}
+
+<h1>@(Model.CurrentCategory.CategoryID == 0 ? "New Category" : "Edit Category")</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<input type="hidden" asp-for="CurrentCategory.CategoryID" />
+
+	<label>
+		CategoryName:
+		<input type="text" asp-for="CurrentCategory.CategoryName"
+			placeholder="enter category name"/>
+		<span asp-validation-for="CurrentCategory.CategoryName" class="text-danger"></span>
+	</label>
+
+	<label>
+		Description:
+		<textarea rows="3" cols="50" asp-for="CurrentCategory.Description">
+
+		</textarea>
+	</label>
+
+	@if(Model.CurrentCategory.CategoryID == 0) {
+		<button type="submit" asp-page-handler="New">Save New</button>
+	}
+
+	else {
+		<button type="submit" asp-page-handler="Update">Update</button>
+		<button type="submit" asp-page-handler="Delete" 
+		onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+	}
+
+	<button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button>
+</form>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
