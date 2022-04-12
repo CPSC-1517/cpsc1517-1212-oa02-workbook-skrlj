@@ -1,4 +1,78 @@
 ﻿@page
 @model WestWindWebApp.Pages.Products.ProductCRUDModel
 @{
+	ViewData["Title"] = "Product CRUD";
 }
+<h1>Product Maintenance</h1>
+
+<p>@Model.FeedbackMessage</p>
+
+<form method="post">
+	<label>
+		Product Name:
+		<input asp-for="CurrentProduct.ProductName" type="text" placeholder="product name"/>
+		<span asp-validation-for="CurrentProduct.ProductName"></span>
+	</label>
+
+	<label>
+		Supplier:
+		<select asp-for="CurrentProduct.SupplierID">
+			@foreach(var currentSupplier in Model.SupplierList)
+			{
+				<option value="@currentSupplier.SupplierID" 
+					selected=@(Model.CurrentProduct != null && currentSupplier.SupplierID == Model.CurrentProduct.SupplierID)>
+					@currentSupplier.CompanyName
+				</option>
+			}
+		</select>
+		<span asp-validation-for="CurrentProduct.SupplierID"></span>
+	</label>
+
+	<label>
+		Category:
+		<select asp-for="CurrentProduct.CategoryID">
+			@foreach(var currentCategory in Model.CategoryList)
+			{
+				<option value="@currentCategory.CategoryID" 
+					selected=@(Model.CurrentProduct != null && currentCategory.CategoryID == Model.CurrentProduct.CategoryID)>
+					@currentCategory.CategoryName
+				</option>
+			}
+		</select>
+		<span asp-validation-for="CurrentProduct.CategoryID"></span>
+	</label>
+
+	<label>
+		Quantity Per Unit
+		<input asp-for="CurrentProduct.QuantityPerUnit" type="text" placeholder="Unit Size"/>
+		<span asp-validation-for="CurrentProduct.QuantityPerUnit"></span>
+	</label>
+
+	<label>
+		Minimum Order Quantity
+		<input asp-for="CurrentProduct.MinimumOrderQuantity" type="number" min="1" step="1" placeholder="Minimum Order Quantity"/>
+		<span asp-validation-for="CurrentProduct.MinimumOrderQuantity"></span>
+	</label>
+
+	<label>
+		Unit Price
+		<input asp-for="CurrentProduct.UnitPrice" type="number" min="0.00" step="0.01" placeholder="Unit Price"/>
+		<span asp-validation-for="CurrentProduct.UnitPrice"></span>
+	</label>
+
+	<label>
+		Units On Order
+		<input asp-for="CurrentProduct.UnitsOnOrder" type="number" min="0" step="1" placeholder="Units On Order"/>
+		<span asp-validation-for="CurrentProduct.UnitsOnOrder"></span>
+	</label>
+
+	<label>
+		Discontinued
+		<input asp-for="CurrentProduct.Discontinued" type="checkbox" value="true" />
+		<span asp-validation-for="CurrentProduct.Discontinued"></span>
+	</label>
+
+	<button type="submit" asp-page-handler="New">Save New</button>
+	<button type="submit" asp-page-handler="Clear" formnovalidate>Clear</button>
+	<button type="submit" asp-page-handler="Search" formnovalidate>Search</button>
+</form>

@@ -31,8 +31,53 @@ namespace WestWindWebApp.Pages.Products
         [BindProperty]
         public int? SelectedCategoryID { get; set; }
 
+        [BindProperty]
+        public Product CurrentProduct { get; set; }
+
+        [TempData]
+        public string FeedbackMessage { get; set; }
+
         public void OnGet()
         {
+        }
+
+        public IActionResult OnPostNew()
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    int newProductID = _productServices.Product_AddProduct(CurrentProduct);
+                    FeedbackMessage = $"ProductID ({newProductID}) has been added to the system";
+                    RedirectToPage(new { productID = newProductID });
+                }
+
+                catch (Exception ex)
+                {
+                    FeedbackMessage = GetInnerException(ex).Message;
+                }
+            }
+            return Page();
+        }
+        
+        public IActionResult OnPostClear()
+        {
+            FeedbackMessage = "";
+            ModelState.Clear();
+            return RedirectToPage(new { productID = (int?) null });
+        }
+
+        public IActionResult OnPostSearch()
+        {
+            return RedirectToPage("/Products/CategoryProducts");
+        }
+
+        private Exception GetInnerException(Exception ex)
+        {
+            //drill down to the REAL ERROR message
+            while (ex.InnerException != null)
+                ex = ex.InnerException;
+            return ex;
         }
     }
 }
